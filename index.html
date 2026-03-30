@@ -3,7 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-body { font-family: 'Times New Roman', serif; background-color: #008000; margin: 0; padding-top: 100px; }
+/* 1. Interface Styles (Search Page) */
+body { font-family: 'Times New Roman', serif; background-color: #008000; margin: 0; padding-top: 50px; }
 .top-header { background-color: #FFA500; color: #000; text-align: center; padding: 15px; border-bottom: 3px solid #0056b3; }
 #search-box { max-width: 400px; margin: 30px auto; background: #C0C0C0; padding: 5px; border: 2px solid #333; text-align: center; }
 .search-inner { background: #fff; padding: 20px; border: 1px solid #333; }
@@ -11,26 +12,45 @@ body { font-family: 'Times New Roman', serif; background-color: #008000; margin:
 .input-row label { background: #E0E0E0; padding: 8px; width: 100px; text-align: left; border-right: 1px solid #333; font-weight: bold; }
 .input-row input { border: none; padding: 8px; flex: 1; outline: none; }
 .check-btn { background: #5D9CEC; color: white; border: 1px solid #fff; padding: 10px 25px; cursor: pointer; font-weight: bold; margin-top: 10px; border-radius: 4px; }
-.m-container { display: none; width: 750px; margin: 20px auto; border: 2px solid #000; padding: 20px; background: #fff; box-sizing: border-box; }
-.header-box { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 10px; }
-.logo-img { width: 70px; margin-bottom: 5px; }
-table { width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: fixed; }
-th, td { border: 1px solid #000; padding: 6px; text-align: center; font-size: 13px; }
-.yellow-bar { background: #FFEA00 !important; font-weight: bold; }
-.info-table { border: none; margin-bottom: 15px; table-layout: auto !important; width: 100%; }
-.info-table td { border: none; text-align: left; padding: 5px 0; font-size: 14px; vertical-align: middle; }
-.label-cell { font-weight: bold; width: 130px; } 
-.value-cell { padding-left: 5px !important; } 
-.photo-wrap { width: 110px; height: 130px; border: 1px solid #000; background: #f0f0f0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-.photo-img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.note-section { font-size: 11px; text-align: justify; margin-top: 15px; border-top: 1px solid #000; padding-top: 10px; }
+
+/* 2. New Result Design (Decorative Border) */
+.m-container { 
+    display: none; 
+    width: 820px; 
+    margin: 20px auto; 
+    border: 3px double #000; 
+    outline: 8px solid #fff; 
+    box-shadow: 0 0 0 10px #4d4d4d; 
+    padding: 20px; 
+    background: #fff; 
+    box-sizing: border-box; 
+}
+
+/* 3. Merged Header Design (From Screenshot) */
+.header-box-new { text-align: center; position: relative; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px solid #000; }
+.logo-left { position: absolute; left: 0; top: 0; width: 100px; }
+.school-name { color: #3e7d58; font-size: 38px; font-weight: bold; margin: 0; font-family: Arial, sans-serif; }
+.trust-name { color: #3e7d58; font-size: 13px; font-weight: bold; margin: 2px 0; }
+.header-info { font-size: 11px; font-weight: bold; margin: 1px 0; line-height: 1.2; }
+.report-strip { background-color: #43515e; color: white; padding: 6px; font-size: 17px; font-weight: bold; margin-top: 15px; letter-spacing: 1px; }
+
+/* 4. Info & Marks Table Styles */
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #000; padding: 6px; text-align: center; font-size: 13px; font-weight: bold; }
+.info-table { border: none; margin-bottom: 15px; width: 100%; }
+.info-table td { border: 1px solid #000; text-align: left; padding: 8px; font-size: 14px; }
+.photo-cell { width: 115px; text-align: center !important; padding: 2px !important; }
+.photo-img { width: 110px; height: 125px; object-fit: cover; border: 1px solid #000; }
+.yellow-bar { background: #FFEA00 !important; }
+
 .footer-signs { margin-top: 40px; display: flex; justify-content: space-between; font-weight: bold; font-size: 12px; }
-.bottom-footer { background-color: #FFA500; color: #000; text-align: center; padding: 15px; font-size: 13px; margin-top: 50px; }
+.sig-line { border-top: 1px solid #000; width: 200px; text-align: center; padding-top: 5px; }
+.bottom-footer { background-color: #FFA500; text-align: center; padding: 15px; margin-top: 50px; }
 
 @media print { 
-body { background-color: #fff !important; }
-.top-header, #search-box, .bottom-footer, .print-btn-div { display: none !important; } 
-.m-container { display: block !important; width: 100% !important; margin: 0 !important; border: 2px solid #000 !important; }
+    body { background-color: #fff !important; padding-top: 0; }
+    .top-header, #search-box, .bottom-footer, .print-btn-div { display: none !important; } 
+    .m-container { display: block !important; width: 100% !important; margin: 0 !important; border: 2px solid #000 !important; outline: none; box-shadow: none; }
 }
 </style>
 </head>
@@ -49,58 +69,37 @@ body { background-color: #fff !important; }
         <div class="input-row"><label>Roll No:</label><input type="text" id="roll" placeholder="Enter Roll No"></div>
         <button class="check-btn" onclick="find()">Check Result</button>
     </div>
-    
-<div class="header-box-final" style="text-align: center; position: relative; border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 10px;">
-    <img src="https://drive.google.com/thumbnail?id=1kl8LqZ2s1TUthpCmp6PW4xEpv7dDluzX&sz=w300" 
-         style="position: absolute; left: 0; top: 0; width: 90px;">
-    
-    <h1 style="color: #3e7d58; font-size: 38px; font-weight: bold; margin: 0; font-family: Arial, sans-serif;">SAGAR PUBLIC SCHOOL</h1>
-    <div style="color: #3e7d58; font-size: 13px; font-weight: bold; margin: 2px 0;">EDUCATIONAL & WELFARE TRUST</div>
-    <div style="font-size: 11px; font-weight: bold; line-height: 1.2;">
-        QUAZITOLA, BARSOI, KATIHAR, BIHAR 855102<br>
-        RTE Registration no:- 21211472023218114225<br>
-        UDISE Code :- 10101122703<br>
-        <span style="color: blue; text-decoration: underline;">Email-sagarpublicschool2023@gmail.com</span>
-    </div>
+</div>
 
-    <div style="background-color: #43515e; color: white; padding: 6px; font-size: 17px; font-weight: bold; margin-top: 15px; text-transform: uppercase;">
-        2<sup>nd</sup> TERMINAL REPORT CARD 2025 - 26
+<div id="output" class="m-container">
+    <div class="header-box-new">
+        <img src="https://drive.google.com/thumbnail?id=1kl8LqZ2s1TUthpCmp6PW4xEpv7dDluzX&sz=w300" class="logo-left">
+        <h1 class="school-name">SAGAR PUBLIC SCHOOL</h1>
+        <div class="trust-name">EDUCATIONAL & WELFARE TRUST</div>
+        <div class="header-info">
+            QUAZITOLA, BARSOI, KATIHAR, BIHAR 855102<br>
+            RTE Registration no:- 21211472023218114225<br>
+            UDISE Code :- 10101122703<br>
+            <span style="color: blue; text-decoration: underline;">Email-sagarpublicschool2023@gmail.com</span>
+        </div>
+        <div class="report-strip">2<sup>nd</sup> TERMINAL REPORT CARD 2025 - 26</div>
     </div>
 
     <table class="info-table">
         <tr>
-            <td class="label-cell">Registration No:</td>
-            <td class="value-cell"><span id="out-reg"></span></td>
-            <td style="width:20px;"></td> <td class="label-cell">Roll No:</td>
-            <td class="value-cell"><span id="out-roll"></span></td>
-            <td rowspan="5" style="width: 130px; text-align: right; vertical-align: top; padding-left:10px;">
-                <div class="photo-wrap"><img id="out-photo" class="photo-img"></div>
+            <td colspan="3">STUDENT'S NAME:- <span id="out-name"></span></td>
+            <td>ID NO:- <span id="out-reg"></span></td>
+        </tr>
+        <tr>
+            <td colspan="4">FATHER'S NAME:- <span id="out-father"></span></td>
+        </tr>
+        <tr>
+            <td style="width: 25%;">CLASS:- <span id="out-class"></span></td>
+            <td style="width: 20%;">SEC:- <span id="out-section"></span></td>
+            <td style="width: 25%;">ROLL:- <span id="out-roll"></span></td>
+            <td class="photo-cell">
+                <img id="out-photo" class="photo-img">
             </td>
-        </tr>
-        <tr>
-            <td class="label-cell">Student Name:</td>
-            <td class="value-cell"><span id="out-name"></span></td>
-            <td></td>
-            <td class="label-cell">Class:</td>
-            <td class="value-cell"><b><span id="out-class"></span></b></td>
-        </tr>
-        <tr>
-            <td class="label-cell">Father's Name:</td>
-            <td class="value-cell"><span id="out-father"></span></td>
-            <td></td>
-            <td class="label-cell">Section:</td>
-            <td class="value-cell"><span id="out-section"></span></td>
-        </tr>
-        <tr>
-            <td class="label-cell">Mother's Name:</td>
-            <td class="value-cell"><span id="out-mother"></span></td>
-            <td></td>
-            <td class="label-cell">Date of Birth:</td>
-            <td class="value-cell"><span id="out-dob"></span></td>
-        </tr>
-        <tr>
-            <td class="label-cell">Exam Centre:</td>
-            <td colspan="4" class="value-cell"><span id="out-center"></span></td>
         </tr>
     </table>
 
@@ -119,31 +118,25 @@ body { background-color: #fff !important; }
         <tbody id="marks-table-body"></tbody>
         <tfoot>
             <tr class="yellow-bar">
-                <td>TOTAL</td><td></td><td></td><td id="gt-max"></td><td></td><td></td><td></td><td id="gt-obt"></td><td id="f-status"></td>
+                <td colspan="4">TOTAL MARKS OBTAINED</td>
+                <td></td><td></td><td></td><td id="gt-obt"></td><td id="f-status"></td>
             </tr>
         </tfoot>
     </table>
 
-    <div style="margin-top:10px; font-weight:bold; font-size:14px;">
-        OVERALL PERCENTAGE:- <span id="out-per"></span>% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OVERALL GRADE:- <span id="f-status"></span>
+    <div style="margin-top:15px; font-weight:bold; font-size:14px;">
+        OVERALL PERCENTAGE:- <span id="out-per"></span>% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OVERALL GRADE:- <span id="final-grade"></span>
     </div>
     <p style="margin-top:10px;">The candidate has <b id="final-txt"></b> and obtained Marks <b id="final-marks"></b>.</p>
 
-    <div class="note-section">
-        <b>NOTE:</b><br>
-        1. This provisional result intimation is issued as a notice only. Errors and omissions excepted.<br>
-        2. Star (*) indicates that the candidate has passed the subject with concessional marks.<br>
-        <br><br><br><br>
-    </div>
-
     <div class="footer-signs">
-        <span>Signature of Parents</span>
-        <span>Signature of Class Teacher</span>
-        <span>Seal & Signature of Principal</span>
+        <div class="sig-line">Signature of Parents</div>
+        <div class="sig-line">Signature of Class Teacher</div>
+        <div class="sig-line">Seal & Signature of Principal</div>
     </div>
 
     <div style="margin-top:30px; text-align:center;" class="print-btn-div">
-        <button onclick="if(window.AndroidPrint){ AndroidPrint.triggerPrint(); } else { window.print(); }" style="padding:12px 30px; background:#008000; color:white; border:none; cursor:pointer; font-weight:bold; border-radius:5px;">PRINT / SAVE PDF</button>
+        <button onclick="window.print()" style="padding:12px 30px; background:#008000; color:white; border:none; cursor:pointer; font-weight:bold; border-radius:5px;">PRINT / SAVE PDF</button>
         <button onclick="location.reload()" style="padding:10px 20px; background:#666; color:white; border:none; margin-left:10px; cursor:pointer; border-radius:4px;">BACK</button>
     </div>
 </div>
@@ -153,30 +146,21 @@ body { background-color: #fff !important; }
 </div>
 
 <script>
-    // Paste your Google Apps Script Web App URL here
     const API_URL = "https://script.google.com/macros/s/AKfycbwQK11AtmVGhs_tLKU8ua8lUfxugT3e1PzvCkBzbOcX8aAdypDS3pLSH5lDbuUUWX5E/exec";
+    
     function find() {
         var r = document.getElementById('roll').value;
         var c = document.getElementById('cls').value;
-        if(!r || !c) return alert("Fill all the details!");
-        
+        if(!r || !c) return alert("Fill all details!");
         document.querySelector('.check-btn').innerText = "Searching...";
         
-        // Fetching data from the Merged Code.gs
         fetch(`${API_URL}?action=getResult&rollNo=${r}&className=${c}`)
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
                 document.querySelector('.check-btn').innerText = "Check Result";
-                if(data == "Not Found" || data == "Invalid Class") {
-                    return alert("Data didn't match!");
-                }
+                if(data == "Not Found" || data == "Invalid Class") return alert("Data didn't match!");
                 show(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                document.querySelector('.check-btn').innerText = "Check Result";
-                alert("Connection Error!");
-            });
+            }).catch(e => { alert("Connection Error!"); });
     }
 
     function show(d) {
@@ -191,16 +175,8 @@ body { background-color: #fff !important; }
         document.getElementById('out-reg').innerText = d.regNo;
         document.getElementById('out-name').innerText = d.name;
         document.getElementById('out-father').innerText = d.father;
-        document.getElementById('out-center').innerText = d.center;
-        document.getElementById('out-section').innerText = d.section || "-";
-        document.getElementById('out-dob').innerText = d.dob || "-";
-        document.getElementById('out-mother').innerText = d.mother || "-";
         
-        if(d.photo) { 
-            document.getElementById('out-photo').src = d.photo; 
-        } else {
-            document.getElementById('out-photo').src = ""; // Clear if no photo
-        }
+        if(d.photo) document.getElementById('out-photo').src = d.photo;
 
         let rows = "";
         d.subjects.forEach(s => {
@@ -215,13 +191,17 @@ body { background-color: #fff !important; }
         });
         
         document.getElementById('marks-table-body').innerHTML = rows;
-        document.getElementById('gt-max').innerText = d.gtMax;
         document.getElementById('gt-obt').innerText = d.gtObt;
         document.getElementById('f-status').innerText = d.status;
-        document.getElementById('f-status').style.color = d.sColor;
         document.getElementById('final-txt').innerText = d.status;
-        document.getElementById('final-txt').style.color = d.sColor;
         document.getElementById('final-marks').innerText = d.gtObt;
+        
+        // Auto Grade Calculation Logic
+        let per = (d.gtObt / (d.subjects.length * 100)) * 100;
+        document.getElementById('out-per').innerText = per.toFixed(1);
+        let grade = "C";
+        if(per >= 90) grade = "A+"; else if(per >= 75) grade = "A"; else if(per >= 60) grade = "B";
+        document.getElementById('final-grade').innerText = grade;
     }
 </script>
 </body>

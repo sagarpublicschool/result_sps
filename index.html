@@ -3,126 +3,117 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-/* Purana Background aur layout */
-body { font-family: 'Arial', sans-serif; background-color: #008000; margin: 0; padding-top: 50px; }
+body { font-family: 'Times New Roman', serif; background-color: #008000; margin: 0; padding-top: 100px; }
+.top-header { background-color: #FFA500; color: #000; text-align: center; padding: 15px; border-bottom: 3px solid #0056b3; }
+#search-box { max-width: 400px; margin: 30px auto; background: #C0C0C0; padding: 5px; border: 2px solid #333; text-align: center; }
+.search-inner { background: #fff; padding: 20px; border: 1px solid #333; }
+.input-row { display: flex; margin-bottom: 10px; border: 1px solid #333; }
+.input-row label { background: #E0E0E0; padding: 8px; width: 100px; text-align: left; border-right: 1px solid #333; font-weight: bold; }
+.input-row input { border: none; padding: 8px; flex: 1; outline: none; }
+.check-btn { background: #5D9CEC; color: white; border: 1px solid #fff; padding: 10px 25px; cursor: pointer; font-weight: bold; margin-top: 10px; border-radius: 4px; }
 
-/* Naya Border aur Container Design */
+/* Result Container with Decorative Border like Image */
 .m-container { 
     display: none; 
     width: 800px; 
     margin: 20px auto; 
-    border: 15px solid #6b8e6b; /* Image jaisa double/thick border effect */
-    outline: 2px solid #000;
-    padding: 10px; 
+    border: 10px double #4a4a4a; 
+    padding: 20px; 
     background: #fff; 
     box-sizing: border-box; 
-    position: relative;
 }
 
-/* Header Section (Same as Image) */
-.main-header {
-    border: 2px solid #000;
-    padding: 10px;
+/* Specific Heading Design from Image */
+.header-box-new {
     text-align: center;
-    margin-bottom: 10px;
     position: relative;
+    padding-bottom: 10px;
 }
-
-.school-logo {
+.school-logo-main {
     position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 80px;
+    left: 0;
+    top: 5px;
+    width: 90px;
 }
-
-.school-name {
-    color: #2E7D32; /* Green color from image */
-    font-size: 32px;
+.school-name-text {
+    color: #3e7d58; 
+    font-size: 38px;
     font-weight: bold;
     margin: 0;
-    letter-spacing: 1px;
+    font-family: Arial, sans-serif;
 }
-
-.school-details {
-    font-size: 11px;
-    color: #000;
-    margin: 2px 0;
+.sub-info {
+    font-size: 13px;
     font-weight: bold;
+    color: #3e7d58;
+    margin: 2px 0;
 }
-
-.report-card-title {
+.contact-info {
+    font-size: 11px;
+    font-weight: bold;
+    margin: 2px 0;
+}
+.report-title-strip {
     background-color: #43515e;
     color: white;
-    padding: 5px;
-    margin-top: 5px;
-    font-size: 16px;
+    padding: 6px;
+    font-size: 17px;
     font-weight: bold;
+    margin-top: 10px;
 }
 
-/* Info Table Styling */
-.info-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
-.info-table td { 
-    border: 1px solid #000; 
-    padding: 8px; 
-    text-align: left; 
-    font-size: 14px; 
-    font-weight: bold;
-}
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #000; padding: 6px; text-align: center; font-size: 13px; }
+.info-table { border: none; margin-bottom: 15px; width: 100%; }
+.info-table td { border: 1px solid #000; text-align: left; padding: 8px; font-size: 14px; font-weight: bold;}
+.photo-box { width: 110px; height: 130px; border: 1px solid #000; background: #f9f9f9; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.photo-img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Marks Table */
-.marks-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-.marks-table th, .marks-table td { 
-    border: 1px solid #000; 
-    padding: 5px; 
-    text-align: center; 
-    font-size: 13px; 
-}
-.marks-table th { background: #f2f2f2; }
-
-/* Search Box & Footer */
-.top-header { background-color: #FFA500; color: #000; text-align: center; padding: 15px; }
-#search-box { max-width: 400px; margin: 30px auto; background: #C0C0C0; padding: 15px; border: 2px solid #333; text-align: center; }
-.check-btn { background: #5D9CEC; color: white; padding: 10px 25px; cursor: pointer; border: none; border-radius: 4px; }
-.bottom-footer { background-color: #FFA500; text-align: center; padding: 15px; margin-top: 50px; }
+.footer-signs { margin-top: 50px; display: flex; justify-content: space-between; font-weight: bold; font-size: 13px; }
+.bottom-footer { background-color: #FFA500; color: #000; text-align: center; padding: 15px; font-size: 13px; margin-top: 50px; }
 
 @media print { 
     body { background-color: #fff !important; padding-top: 0; }
     .top-header, #search-box, .bottom-footer, .print-btn-div { display: none !important; } 
-    .m-container { display: block !important; width: 100% !important; border: 10px solid #6b8e6b !important; }
+    .m-container { display: block !important; width: 100% !important; margin: 0 !important; border: 8px double #000 !important; }
 }
 </style>
 </head>
 <body>
 
 <div class="top-header" id="ui-header">
-    <h1>SAGAR PUBLIC SCHOOL - Result Portal</h1>
+    <h1>SAGAR PUBLIC SCHOOL</h1>
+    <p>Quazitola Chowk, Barsoi, Katihar - 855102</p>
 </div>
 
 <div id="search-box">
-    <h3 style="margin-top:0;">Enter Details</h3>
-    <input type="text" id="cls" placeholder="Class (e.g. 7th)" style="width:80%; padding:8px; margin-bottom:10px;"><br>
-    <input type="text" id="roll" placeholder="Roll No" style="width:80%; padding:8px; margin-bottom:10px;"><br>
-    <button class="check-btn" onclick="find()">Check Result</button>
+    <div class="search-inner">
+        <h3 style="margin-top:0;">Result Enquiry</h3>
+        <div class="input-row"><label>Exam:</label><input type="text" value="Annual Examination - 2025" readonly></div>
+        <div class="input-row"><label>Class:</label><input type="text" id="cls" placeholder="e.g. 7th"></div>
+        <div class="input-row"><label>Roll No:</label><input type="text" id="roll" placeholder="Enter Roll No"></div>
+        <button class="check-btn" onclick="find()">Check Result</button>
+    </div>
 </div>
 
 <div id="output" class="m-container">
-    <div class="main-header">
-        <img src="https://drive.google.com/thumbnail?id=1kl8LqZ2s1TUthpCmp6PW4xEpv7dDluzX&sz=w300" class="school-logo">
-        <h1 class="school-name">SAGAR PUBLIC SCHOOL</h1>
-        <div class="school-details">
-            EDUCATIONAL & WELFARE TRUST<br>
+    <div class="header-box-new">
+        <img src="https://drive.google.com/thumbnail?id=1kl8LqZ2s1TUthpCmp6PW4xEpv7dDluzX&sz=w300" class="school-logo-main">
+        <h1 class="school-name-text">SAGAR PUBLIC SCHOOL</h1>
+        <div class="sub-info">EDUCATIONAL & WELFARE TRUST</div>
+        <div class="contact-info">
             QUAZITOLA, BARSOI, KATIHAR, BIHAR 855102<br>
             RTE Registration no:- 21211472023218114225<br>
-            UDISE Code :- 10101122703 | Email:- sagarpublicschool2023@gmail.com
+            UDISE Code :- 10101122703<br>
+            <span style="color: blue; text-decoration: underline;">Email-sagarpublicschool2023@gmail.com</span>
         </div>
-        <div class="report-card-title">2<sup>ND</sup> TERMINAL REPORT CARD 2025 - 26</div>
+        <div class="report-title-strip">2<sup>nd</sup> TERMINAL REPORT CARD 2025 - 26</div>
     </div>
 
-    <table class="info-table">
+    <table class="info-table" style="margin-top: 15px;">
         <tr>
-            <td colspan="2">STUDENT'S NAME:- <span id="out-name"></span></td>
-            <td colspan="2">ID NO:- <span id="out-reg"></span></td>
+            <td colspan="3">STUDENT'S NAME:- <span id="out-name"></span></td>
+            <td>ID NO:- <span id="out-reg"></span></td>
         </tr>
         <tr>
             <td colspan="4">FATHER'S NAME:- <span id="out-father"></span></td>
@@ -131,101 +122,120 @@ body { font-family: 'Arial', sans-serif; background-color: #008000; margin: 0; p
             <td>CLASS:- <span id="out-class"></span></td>
             <td>SEC:- <span id="out-section"></span></td>
             <td>ROLL:- <span id="out-roll"></span></td>
-            <td style="width:100px; text-align:center;">PHOTO</td>
+            <td rowspan="1" style="width: 120px; text-align: center; padding: 5px;">
+                <div class="photo-box"><img id="out-photo" class="photo-img" alt="PHOTO"></div>
+            </td>
         </tr>
     </table>
 
-    <table class="marks-table">
+    <table>
         <thead>
-            <tr>
-                <th rowspan="2">S.NO</th>
-                <th rowspan="2">SUBJECT</th>
+            <tr style="background: #f2f2f2;">
+                <th rowspan="2" style="width:8%">S.NO</th>
+                <th rowspan="2" style="width:35%">SUBJECT</th>
                 <th rowspan="2">TOTAL MARKS</th>
                 <th colspan="3">OBTAINED MARKS</th>
             </tr>
-            <tr>
-                <th>THEORY</th>
-                <th>ASSIGNMENT / VIVA</th>
-                <th>TOTAL OBTAIN MARKS</th>
+            <tr style="background: #f2f2f2;">
+                <th>THEORY</th><th>ASSIGNMENT / VIVA</th><th>TOTAL OBTAIN MARKS</th>
             </tr>
         </thead>
-        <tbody id="marks-table-body">
-            </tbody>
+        <tbody id="marks-table-body"></tbody>
         <tfoot>
-            <tr style="font-weight:bold; background:#eee;">
+            <tr style="font-weight: bold; background: #eee;">
                 <td colspan="2">TOTAL MARKS</td>
-                <td id="gt-max"></td>
-                <td colspan="2">TOTAL AGGREGATE</td>
+                <td>800</td> <td colspan="2" style="text-align: right;">TOTAL AGGREGATE</td>
                 <td id="gt-obt"></td>
             </tr>
         </tfoot>
     </table>
 
-    <div style="margin-top:10px; font-weight:bold;">
-        OVERALL PERCENTAGE:- <span id="final-per"></span>% &nbsp;&nbsp;&nbsp;&nbsp; OVERALL GRADE:- <span id="f-grade"></span>
+    <div style="margin-top:15px; font-weight: bold; font-size: 15px;">
+        OVERALL PERCENTAGE:- <span id="out-per"></span>% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OVERALL GRADE:- <span id="f-grade"></span>
     </div>
 
-    <div style="margin-top:20px; font-style: italic;">Performance:- <span id="final-txt"></span></div>
-
-    <div style="margin-top:40px; display:flex; justify-content: space-between; font-weight:bold; border-top: 1px solid #000; padding-top:20px;">
-        <div>DATED:- 15-12-2025</div>
-        <div style="text-align:center; border-top:1px solid #000; width:150px;">PRINCIPAL'S SIGNATURE</div>
-        <div style="text-align:center; border-top:1px solid #000; width:180px;">CONTROLLER OF EXAMINATION</div>
+    <div style="margin-top:10px;">
+        <b>Performance:-</b> <span id="final-txt"></span>
     </div>
 
-    <div class="print-btn-div" style="margin-top:30px; text-align:center;">
-        <button onclick="window.print()" style="padding:10px 20px; background:green; color:white; border:none; cursor:pointer;">PRINT RESULT</button>
-        <button onclick="location.reload()" style="padding:10px 20px; background:#666; color:white; border:none; margin-left:10px;">BACK</button>
+    <div style="margin-top:30px; font-weight: bold;">
+        DATED:- 15-12-2025
+    </div>
+
+    <div class="footer-signs">
+        <span style="border-top: 1px solid #000; min-width: 200px; text-align: center;">PRINCIPAL'S SIGNATURE</span>
+        <span style="border-top: 1px solid #000; min-width: 200px; text-align: center;">CONTROLLER OF EXAMINATION</span>
+    </div>
+
+    <div style="margin-top:30px; text-align:center;" class="print-btn-div">
+        <button onclick="window.print()" style="padding:12px 30px; background:#008000; color:white; border:none; cursor:pointer; font-weight:bold; border-radius:5px;">PRINT / SAVE PDF</button>
+        <button onclick="location.reload()" style="padding:10px 20px; background:#666; color:white; border:none; margin-left:10px; cursor:pointer; border-radius:4px;">BACK</button>
     </div>
 </div>
 
 <div class="bottom-footer" id="ui-footer">
-    Developed by: Riyaz Ahmad
+    Developed by: Riyaz Ahmad, PGT Zoology
 </div>
 
 <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbwQK11AtmVGhs_tLKU8ua8lUfxugT3e1PzvCkBzbOcX8aAdypDS3pLSH5lDbuUUWX5E/exec";
-
+    
     function find() {
         var r = document.getElementById('roll').value;
         var c = document.getElementById('cls').value;
-        if(!r || !c) return alert("Fill all details!");
+        if(!r || !c) return alert("Please fill all details!");
+        document.querySelector('.check-btn').innerText = "Searching...";
+        
         fetch(`${API_URL}?action=getResult&rollNo=${r}&className=${c}`)
-            .then(res => res.json())
+            .then(response => response.json())
             .then(data => {
-                if(data == "Not Found") return alert("Not Found");
+                document.querySelector('.check-btn').innerText = "Check Result";
+                if(data == "Not Found" || data == "Invalid Class") return alert("Data didn't match!");
                 show(data);
+            })
+            .catch(error => {
+                document.querySelector('.check-btn').innerText = "Check Result";
+                alert("Connection Error!");
             });
     }
 
     function show(d) {
         document.getElementById('search-box').style.display='none';
         document.getElementById('ui-header').style.display='none';
+        document.getElementById('ui-footer').style.display='none';
+        document.body.style.backgroundColor = "#fff"; 
         document.getElementById('output').style.display='block';
-        document.body.style.backgroundColor = "#fff";
-
-        document.getElementById('out-name').innerText = d.name;
-        document.getElementById('out-reg').innerText = d.regNo;
-        document.getElementById('out-father').innerText = d.father;
+        
         document.getElementById('out-class').innerText = d.classFromSheet;
         document.getElementById('out-roll').innerText = d.rollNo;
-        document.getElementById('out-section').innerText = d.section || "A";
+        document.getElementById('out-reg').innerText = d.regNo;
+        document.getElementById('out-name').innerText = d.name;
+        document.getElementById('out-father').innerText = d.father;
+        document.getElementById('out-section').innerText = d.section || "-";
+        
+        // Photo Display Logic
+        if(d.photo) {
+            document.getElementById('out-photo').src = d.photo;
+        }
 
         let rows = "";
-        d.subjects.forEach((s, index) => {
+        d.subjects.forEach((s, i) => {
             rows += `<tr>
-                <td>${index + 1}</td>
-                <td style="text-align:left;">${s.n}</td>
+                <td>${i+1}</td>
+                <td style="text-align:left; padding-left:10px;">${s.n}</td>
                 <td>100</td>
-                <td>${s.m[4]}</td>
-                <td>${s.m[3]}</td>
-                <td>${s.m[6]}</td>
+                <td>${s.m[4]}</td><td>${s.m[3]}</td><td>${s.m[6]}</td>
             </tr>`;
         });
+        
         document.getElementById('marks-table-body').innerHTML = rows;
-        document.getElementById('gt-max').innerText = d.gtMax;
         document.getElementById('gt-obt').innerText = d.gtObt;
+        document.getElementById('f-grade').innerText = d.status; // Grading logic depends on your sheet
         document.getElementById('final-txt').innerText = d.status;
+        
+        // Simple Percentage Calculation
+        let per = (d.gtObt / 800) * 100; // Change 800 according to your total
+        document.getElementById('out-per').innerText = per.toFixed(1);
     }
 </script>
 </body>

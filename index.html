@@ -13,17 +13,15 @@ body { font-family: 'Times New Roman', serif; background-color: #008000; margin:
 .check-btn { background: #5D9CEC; color: white; border: 1px solid #fff; padding: 10px 25px; cursor: pointer; font-weight: bold; margin-top: 10px; border-radius: 4px; }
 .m-container { 
     display: none; 
-    width: 800px; 
+    width: 820px; /* Thoda wide screenshot ki tarah */
     margin: 20px auto; 
+    border: 3px double #000; /* Chain jaisa inner pattern */
+    outline: 8px solid #fff;  /* White gap screenshot ki tarah */
+    box-shadow: 0 0 0 10px #4a4a4a; /* Bahar ka decorative grey/black border */
+    padding: 20px; 
     background: #fff; 
     box-sizing: border-box; 
-    padding: 25px; 
-    
-    /* Exact Screenshot Look: Triple Line Border */
-    border: 1px solid #000;
-    outline: 4px double #000;
-    outline-offset: 5px;
-    box-shadow: 0 0 0 12px #fff, 0 0 0 13px #000;
+    position: relative;
 }
 .header-box { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 10px; }
 .logo-img { width: 70px; margin-bottom: 5px; }

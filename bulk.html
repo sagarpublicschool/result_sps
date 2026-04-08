@@ -4,19 +4,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
-/* Exact Interface Styling as per your screenshot */
+/* Interface Styling */
 body { font-family: 'Times New Roman', serif; background-color: #008000; margin: 0; padding: 0; }
-.top-header { background-color: #FFA500; color: #000; text-align: center; padding: 20px 10px; border-bottom: 2px solid #0056b3; }
-#search-box { max-width: 500px; margin: 40px auto; background: #C0C0C0; padding: 10px; border: 2px solid #333; text-align: center; }
-.search-inner { background: #fff; padding: 20px; border: 1px solid #999; }
-.input-row { display: flex; margin-bottom: 10px; border: 1px solid #999; }
-.input-row label { background: #E0E0E0; padding: 10px; width: 120px; text-align: left; border-right: 1px solid #999; font-weight: bold; }
-.input-row select { border: none; padding: 10px; flex: 1; outline: none; font-size: 16px; background: #fff; }
-.check-btn { background: #5D9CEC; color: white; border: none; padding: 12px; cursor: pointer; font-weight: bold; width: 100%; border-radius: 2px; }
+.top-header { background-color: #FFA500; color: #000; text-align: center; padding: 15px; border-bottom: 3px solid #0056b3; }
+#search-box { max-width: 400px; margin: 30px auto; background: #C0C0C0; padding: 5px; border: 2px solid #333; text-align: center; }
+.search-inner { background: #fff; padding: 20px; border: 1px solid #333; }
+.input-row { display: flex; margin-bottom: 10px; border: 1px solid #333; }
+.input-row label { background: #E0E0E0; padding: 8px; width: 100px; text-align: left; border-right: 1px solid #333; font-weight: bold; }
+.input-row select { border: none; padding: 8px; flex: 1; outline: none; background: #fff; font-size: 14px; }
+.check-btn { background: #5D9CEC; color: white; border: 1px solid #fff; padding: 10px 25px; cursor: pointer; font-weight: bold; margin-top: 10px; border-radius: 4px; width: 100%; }
 
-/* Marksheet Design */
+/* Marksheet Container - Exact Copy from Search Result */
 .m-container { 
-    display: none; /* Initially hidden */
+    display: block; 
     width: 800px; 
     margin: 20px auto; 
     background: #fff; 
@@ -29,155 +29,183 @@ body { font-family: 'Times New Roman', serif; background-color: #008000; margin:
     outline: 2px solid #333; 
     outline-offset: -10px;
     box-shadow: 0 0 0 2px #333; 
-    page-break-after: always; 
+    page-break-after: always; /* New page for each student */
 }
 
-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+.header-box { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 10px; position: relative; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; table-layout: fixed; }
 th, td { border: 1px solid #000; padding: 6px; text-align: center; font-size: 13px; }
 .yellow-bar { background: #FFEA00 !important; font-weight: bold; }
-.info-table { border: none; margin-bottom: 15px; }
-.info-table td { border: none; text-align: left; padding: 5px 0; font-size: 14px; }
-.photo-wrap { width: 110px; height: 130px; border: 1px solid #000; background: #f0f0f0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.info-table { border: none !important; margin-bottom: 15px; table-layout: auto !important; width: 100%; }
+.info-table td { border: none !important; text-align: left; padding: 4px 0; font-size: 14px; vertical-align: middle; }
+.label-cell { font-weight: bold; width: 130px; } 
+.photo-wrap { width: 110px; height: 130px; border: 1px solid #000; background: #f0f0f0; overflow: hidden; display: flex; align-items: center; justify-content: center; float: right; }
 .photo-img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.footer-signs { margin-top: 40px; display: flex; justify-content: space-between; font-weight: bold; font-size: 12px; }
+.note-section { font-size: 11px; text-align: justify; margin-top: 15px; border-top: 1px solid #000; padding-top: 10px; }
+.footer-signs { margin-top: 30px; display: flex; justify-content: space-between; font-weight: bold; font-size: 12px; align-items: flex-end; }
+.sign-box { text-align: center; width: 150px; }
+.sign-img { height: 45px; display: block; margin: 0 auto 5px auto; }
+.bottom-footer { background-color: #FFA500; color: #000; text-align: center; padding: 15px; font-size: 13px; margin-top: 50px; }
 
 @media print { 
     body { background-color: #fff !important; }
-    #search-box, .top-header, .bottom-footer { display: none !important; } 
-    .m-container { display: block !important; margin: 0 auto !important; border: 2px solid #000 !important; width: 100% !important; }
+    #search-box, .top-header, .bottom-footer, #print-controls { display: none !important; } 
+    .m-container { display: block !important; width: 100% !important; margin: 0 !important; border: 2px solid #000 !important; box-shadow: none !important; }
 }
 </style>
 </head>
 <body>
 
-<div class="top-header">
-    <h1>Bulk Marksheet Generator</h1>
-    <p>SAGAR PUBLIC SCHOOL - Barsoi, Katihar</p>
+<div class="top-header" id="ui-header">
+    <h1>SAGAR PUBLIC SCHOOL</h1>
+    <p>Bulk Marksheet Generator - Session 2025-26</p>
 </div>
 
 <div id="search-box">
     <div class="search-inner">
-        <h3>Select Class for Bulk Print</h3>
+        <h3 style="margin-top:0;">Select Class for Bulk Print</h3>
         <div class="input-row">
-            <label>Select Class:</label>
+            <label>Class:</label>
             <select id="cls">
-                <option value="">-- Select Class --</option>
-                <option value="1">Class 1</option>
-                <option value="2">Class 2</option>
-                <option value="3">Class 3</option>
-                <option value="4">Class 4</option>
-                <option value="5">Class 5</option>
-                <option value="6">Class 6</option>
-                <option value="7">Class 7</option>
-                <option value="8">Class 8</option>
-                <option value="9">Class 9</option>
-                <option value="10">Class 10</option>
+                <option value="">-- Select --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
             </select>
         </div>
-        <button id="load-btn" class="check-btn" onclick="loadBulk()">Generate All Marksheets</button>
+        <button class="check-btn" id="load-btn" onclick="loadBulk()">Generate Marksheets</button>
         
         <div id="print-controls" style="display:none; margin-top:15px;">
-            <button class="check-btn" style="background:#008000; margin-bottom:5px;" onclick="window.print()">Print / Save PDF</button>
-            <button class="check-btn" style="background:#666;" onclick="location.reload()">Reset</button>
+            <button class="check-btn" style="background:#008000;" onclick="window.print()">PRINT ALL / SAVE PDF</button>
+            <button class="check-btn" style="background:#666;" onclick="location.reload()">BACK</button>
         </div>
     </div>
 </div>
 
 <div id="bulk-output"></div>
 
+<div class="bottom-footer" id="ui-footer">
+    Developed by: Riyaz Ahmad, PGT Zoology
+</div>
+
 <script>
-    // Apni Apps Script URL yahan dalein
-    const API_URL = "https://script.google.com/macros/s/AKfycbxIduRaZeIqj_qypLgefLM13wNLQ8xXxLqV6hB4AlHazyzNo87JNHKD3irFNL1vGMAN/exec"; 
+    const API_URL = "https://script.google.com/macros/s/AKfycbwQK11AtmVGhs_tLKU8ua8lUfxugT3e1PzvCkBzbOcX8aAdypDS3pLSH5lDbuUUWX5E/exec";
 
     function loadBulk() {
         var c = document.getElementById('cls').value;
-        if(!c) return Swal.fire('Error', 'Please select a class!', 'warning');
+        if(!c) return Swal.fire('Warning', 'Please select a class!', 'warning');
         
         const btn = document.getElementById('load-btn');
-        btn.innerText = "Connecting to Database...";
+        btn.innerText = "Processing...";
         btn.disabled = true;
 
-        // action matches your code.gs update
         fetch(`${API_URL}?action=getAllResults&className=${c}`)
             .then(res => res.json())
             .then(data => {
                 btn.disabled = false;
-                btn.innerText = "Generate All Marksheets";
+                btn.innerText = "Generate Marksheets";
                 
                 if(!data || data === "Not Found" || data.length === 0) {
-                    Swal.fire('No Data', 'Sheet "'+c+'" me koi data nahi mila.', 'info');
+                    Swal.fire('Error', 'No data found in Sheet "'+c+'"', 'error');
                 } else {
-                    renderMarksheets(data);
+                    renderCards(data);
                     document.getElementById('print-controls').style.display = 'block';
-                    document.getElementById('search-box').style.display = 'none';
+                    btn.style.display = 'none';
                 }
             })
             .catch(e => {
                 btn.disabled = false;
-                Swal.fire('Error', 'Connection Error! Check internet or Script URL.', 'error');
+                Swal.fire('Error', 'Connection Failed!', 'error');
             });
     }
 
-    function renderMarksheets(students) {
+    function renderCards(students) {
         let html = "";
         students.forEach(d => {
+            let per = ((d.gtObt / d.gtMax) * 100).toFixed(2);
             let marksRows = "";
             d.subjects.forEach(s => {
-                let sStatus = (Number(s.m[6]) < 30) ? "FAIL" : "PASS"; 
+                let sStatus = (Number(s.m[6]) < 33) ? "FAIL" : "PASS"; 
+                let sColor = (sStatus === "FAIL") ? "red" : "green";
                 marksRows += `<tr>
                     <td style="text-align:left; padding-left:10px;">${s.n}</td>
                     <td>${s.m[0]}</td><td>${s.m[1]}</td><td>${s.m[2]}</td>
                     <td>${s.m[3]}</td><td>${s.m[4]}</td><td>${s.m[5]}</td><td>${s.m[6]}</td>
-                    <td style="font-weight:bold; color:${sStatus=='PASS'?'green':'red'};">${sStatus}</td>
+                    <td style="color:${sColor}; font-weight:bold;">${sStatus}</td>
                 </tr>`;
             });
 
             html += `
-            <div class="m-container" style="display:block;">
-                <div style="text-align: center; position: relative; border-bottom: 2px solid #000; padding-bottom:10px;">
-                    <img src="https://drive.google.com/thumbnail?id=1pWEjzAU2G4AUC0RhIJ8cMHdLtLvQ4YJe&sz=w300" style="position: absolute; left: 0; top: 0; width: 90px;">
-                    <h1 style="color: #3e7d58; margin: 0; font-size: 32px;">SAGAR PUBLIC SCHOOL</h1>
+            <div class="m-container">
+                <div style="text-align: center; position: relative; padding-bottom: 5px; margin-bottom: 10px; border-bottom: 1px solid #000;">
+                    <img src="https://drive.google.com/thumbnail?id=1pWEjzAU2G4AUC0RhIJ8cMHdLtLvQ4YJe&sz=w300" 
+                         style="position: absolute; left: 0; top: 0; width: 95px;">
+                    <h1 style="color: #3e7d58; font-size: 38px; font-weight: bold; margin: 0;">SAGAR PUBLIC SCHOOL</h1>
+                    <div style="color: #3e7d58; font-size: 13px; font-weight: bold;">EDUCATIONAL & WELFARE TRUST</div>
                     <div style="font-size: 11px; font-weight: bold;">QUAZITOLA, BARSOI, KATIHAR, BIHAR 855102</div>
-                    <div style="background:#43515e; color:white; padding:5px; margin-top:10px; font-weight:bold; text-transform:uppercase;">
-                        2nd TERMINAL REPORT CARD 2025-26
+                    <div style="background-color: #43515e; color: white; padding: 7px; font-size: 17px; font-weight: bold; margin-top: 15px; text-transform: uppercase;">
+                        2nd TERMINAL REPORT CARD 2025 - 26
                     </div>
                 </div>
 
                 <table class="info-table">
                     <tr>
-                        <td width="130"><b>Student Name:</b></td><td>${d.name}</td>
-                        <td rowspan="4" width="120" style="text-align:right;">
-                            <div class="photo-wrap" style="float:right;"><img src="${d.photo}" class="photo-img"></div>
+                        <td class="label-cell">Registration No:</td><td>${d.regNo}</td>
+                        <td class="label-cell">Roll No:</td><td>${d.rollNo}</td>
+                        <td rowspan="4" style="width: 130px;">
+                            <div class="photo-wrap"><img src="${d.photo}" class="photo-img"></div>
                         </td>
                     </tr>
-                    <tr><td><b>Father's Name:</b></td><td>${d.father}</td></tr>
-                    <tr><td><b>Roll / Reg No:</b></td><td>${d.rollNo} / ${d.regNo}</td></tr>
-                    <tr><td><b>Class (Section):</b></td><td>${d.classFromSheet} (${d.section || 'A'})</td></tr>
+                    <tr><td class="label-cell">Student Name:</td><td>${d.name}</td><td class="label-cell">Class:</td><td><b>${d.classFromSheet}</b></td></tr>
+                    <tr><td class="label-cell">Father's Name:</td><td>${d.father}</td><td class="label-cell">Section:</td><td>${d.section || "A"}</td></tr>
+                    <tr><td class="label-cell">Mother's Name:</td><td>${d.mother || "-"}</td><td class="label-cell">Date of Birth:</td><td>${d.dob || "-"}</td></tr>
                 </table>
 
                 <table>
                     <tr class="yellow-bar">
-                        <th rowspan="2">SUBJECT</th><th colspan="3">MAX MARKS</th><th colspan="4">MARKS OBTAINED</th><th rowspan="2">STATUS</th>
+                        <th rowspan="2" style="width:30%">SUBJECT</th><th colspan="3">MAX MARKS</th><th colspan="4">MARKS OBTAINED</th><th rowspan="2">STATUS</th>
                     </tr>
                     <tr class="yellow-bar"><th>TH</th><th>PR</th><th>TOT</th><th>AS</th><th>TH</th><th>PR</th><th>TOTAL</th></tr>
                     ${marksRows}
                     <tr class="yellow-bar">
-                        <td>TOTAL</td><td></td><td></td><td>${d.gtMax}</td><td></td><td></td><td></td><td>${d.gtObt}</td><td>${d.status}</td>
+                        <td>TOTAL</td><td></td><td></td><td>${d.gtMax}</td><td></td><td></td><td></td><td>${d.gtObt}</td><td style="color:${d.sColor}">${d.status}</td>
                     </tr>
                 </table>
 
-                <div style="margin-top:15px; font-weight:bold; font-size:16px; border:1px solid #000; padding:5px; display:inline-block;">
-                    OVERALL GRADE: ${d.overallGrade || 'N/A'}
+                <div style="margin-top:15px; font-weight:bold; font-size:14px;">
+                    OVERALL PERCENTAGE:- ${per}% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OVERALL GRADE:- ${d.overallGrade || "N/A"}
+                </div>
+                <p>The candidate has <b style="color:${d.sColor}">${d.status}</b> and obtained Marks <b>${d.gtObt}</b>.</p>
+
+                <div class="note-section">
+                    <b>NOTE:</b><br>
+                    1. This provisional result intimation is issued as a notice only. Errors and omissions excepted.<br>
+                    2. Star (*) indicates that the candidate has passed the subject with concessional marks.
                 </div>
 
                 <div class="footer-signs">
-                    <div style="text-align:center;"><br>Parent's Signature</div>
-                    <div style="text-align:center;"><img src="https://drive.google.com/thumbnail?id=1EpjUL_k0w78HXZeV9G4t5SP5trVYs5yO" style="height:45px;"><br>Director</div>
-                    <div style="text-align:center;"><img src="https://drive.google.com/thumbnail?id=1vTb3S-C3LCLUUkDg2X32tPYFGRcj23t_" style="height:45px;"><br>Principal</div>
+                    <div class="sign-box">Signature of Parents</div>
+                    <div class="sign-box">Signature of Teacher</div>
+                    <div class="sign-box">
+                        <img src="https://drive.google.com/thumbnail?id=1EpjUL_k0w78HXZeV9G4t5SP5trVYs5yO" class="sign-img">
+                        Director
+                    </div>
+                    <div class="sign-box">
+                        <img src="https://drive.google.com/thumbnail?id=1vTb3S-C3LCLUUkDg2X32tPYFGRcj23t_" class="sign-img">
+                        Principal
+                    </div>
                 </div>
             </div>`;
         });
         document.getElementById('bulk-output').innerHTML = html;
+        document.body.style.backgroundColor = "#fff";
     }
 </script>
 </body>
